@@ -1,7 +1,7 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/goss-org/goss/master/docs/schema.yaml
 file:
-  /main.sh:
+  /usr/src/app/main.sh:
     exists: true
-  /entrypoint.sh:
+  /usr/src/app/entrypoint.sh:
     exists: true
