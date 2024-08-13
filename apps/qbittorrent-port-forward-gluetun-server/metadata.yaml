@@ -1,9 +1,9 @@
 ---
-app: qbittorrent-port-forward-gluetun-server-test
+app: qbittorrent-port-forward-gluetun-server
 semver: true
 channels:
   - name: stable
-    platforms: ["linux/amd64", "linux/arm64"]
+    platforms: ["linux/amd64"]
     stable: true
     tests:
       enabled: true
