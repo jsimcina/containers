@@ -1,5 +1,5 @@
 ---
-app: qbittorrent-port-forward-gluetun-server
+app: qbittorrent-port-forward-gluetun-server-test
 semver: true
 channels:
   - name: stable
