@@ -1,6 +1,7 @@
 ---
 app: "gluetun-qb-port-sync"
 base: false
+semver: true
 channels:
   - name: "stable"
     platforms:
