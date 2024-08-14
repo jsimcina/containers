@@ -19,6 +19,6 @@ RUN \
         jq \
         supercronic
 
-COPY ./script.sh /app/script.sh
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./apps/gluetun-qb-port-sync/script.sh /app/script.sh
+COPY ./apps/gluetun-qb-port-sync/entrypoint.sh /entrypoint.sh
 CMD ["/entrypoint.sh"]
