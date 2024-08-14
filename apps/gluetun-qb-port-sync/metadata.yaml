@@ -1,7 +1,6 @@
 ---
 app: "gluetun-qb-port-sync"
 base: false
-semantic_versioning: true
 channels:
   - name: "stable"
     platforms:
