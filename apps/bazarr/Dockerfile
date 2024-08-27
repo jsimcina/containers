@@ -1,8 +1,16 @@
 FROM docker.io/library/python:3.11-alpine
 
-ARG TARGETPLATFORM
 ARG VERSION
 ARG CHANNEL
+ARG TARGETPLATFORM
+ARG TARGETARCH
+ARG TARGETOS
+
+
+LABEL dev.jsimcina.image.target_platform=$TARGETPLATFORM
+LABEL dev.jsimcina.image.target_architecture=$TARGETARCH
+LABEL dev.jsimcina.image.target_os=$TARGETOS
+LABEL org.opencontainers.image.source="https://github.com/morpheus65535/bazarr"
 
 ENV \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -59,7 +67,7 @@ RUN \
         /root/.cargo \
         /tmp/*
 
-COPY ./apps/bazarr/entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 COPY --from=ghcr.io/linuxserver/unrar:7.0.7 /usr/bin/unrar-alpine /usr/bin/unrar
 
 USER nobody:nogroup
@@ -68,5 +76,3 @@ VOLUME ["/config"]
 
 ENTRYPOINT ["/usr/bin/catatonit", "--"]
 CMD ["/entrypoint.sh"]
-
-LABEL org.opencontainers.image.source="https://github.com/morpheus65535/bazarr"
