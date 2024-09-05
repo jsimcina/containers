@@ -1,7 +1,7 @@
 ---
 app: audiobookshelf
 channels:
-  - name: stable
+  - name: master
     platforms: ["linux/amd64", "linux/arm64"]
     stable: true
     tests:
