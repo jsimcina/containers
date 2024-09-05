@@ -23,7 +23,7 @@ RUN apk update && \
 
 COPY --from=build /client/dist /client/dist
 COPY index.js package* /
-COPY server server
+COPY /server server
 
 RUN npm ci --only=production
 
