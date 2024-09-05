@@ -1,5 +1,6 @@
 ---
 app: audiobookshelf
+semver: true
 channels:
   - name: master
     platforms: ["linux/amd64", "linux/arm64"]
