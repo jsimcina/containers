@@ -77,7 +77,6 @@ external_ip=$(get_vpn_external_ip "${gluetun_urls["pub_ip"]}")
 
 if [[ -z "${external_ip}" ]]; then
   log --level error "External IP is empty. Potential VPN or internet connection issue."
-  exit 1
 fi
 
 gluetun_port=$(get_port_from_url "${gluetun_urls["portforwarded"]}")
