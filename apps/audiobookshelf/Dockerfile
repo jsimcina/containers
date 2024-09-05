@@ -20,7 +20,7 @@ RUN apk update && \
     python3 \
     g++ \
     tini
-#Just pissing it off
+
 COPY --from=build /client/dist /client/dist
 COPY index.js package* /
 COPY server server
