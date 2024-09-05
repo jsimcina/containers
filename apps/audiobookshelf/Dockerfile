@@ -1,9 +1,12 @@
-### STAGE 0: Build client ###
 FROM node:20-alpine AS build
-WORKDIR /client
-COPY /client /client
-RUN npm ci && npm cache clean --force
-RUN npm run generate
+
+ARG TARGETPLATFORM
+ARG VERSION
+ARG CHANNEL
+ARG TARBALL_URL
+
+LABEL org.opencontainers.image.source="https://github.com/advplyr/audiobookshelf"
+
 
 ### STAGE 1: Build server ###
 FROM node:20-alpine
@@ -19,11 +22,27 @@ RUN apk update && \
     gcompat \
     python3 \
     g++ \
-    tini
+    tini \
+    && \
+    curl -fsSL "${TARBALL_URL}" \
+    | tar xzf - -C /app --strip-components=1  \
+    && \
+    chown -R root:root /app \
+    && chmod -R 755 /app \
+    && apk del --purge .build-deps \
+    && rm -rf \
+        /root/.cache \
+        /root/.cargo \
+        /tmp/*
 
-COPY --from=build /client/dist /client/dist
+WORKDIR /app/client
+COPY /app/client /client
+RUN npm ci && npm cache clean --force
+RUN npm run generate
+
+COPY --from=build /app/client/dist /client/dist
 COPY index.js package* /
-COPY /server server
+COPY /app/server /server
 
 RUN npm ci --only=production
 
