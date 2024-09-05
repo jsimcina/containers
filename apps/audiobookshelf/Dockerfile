@@ -1,10 +1,9 @@
+### STAGE 0: Build client ###
+FROM node:20-alpine AS build
 ARG TARGETPLATFORM
 ARG VERSION
 ARG CHANNEL
 ARG TARBALL_URL
-
-### STAGE 0: Build client ###
-FROM node:20-alpine AS build
 RUN apk update && \
     apk add --no-cache --update \
     curl \
@@ -17,6 +16,11 @@ RUN npm ci && npm cache clean --force
 RUN npm run generate
 
 ### STAGE 1: Build server ###
+ARG TARGETPLATFORM
+ARG VERSION
+ARG CHANNEL
+ARG TARBALL_URL
+
 FROM node:20-alpine
 
 ENV NODE_ENV=production
