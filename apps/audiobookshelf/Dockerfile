@@ -10,7 +10,7 @@ RUN apk update && \
     tar
 RUN mkdir -p /app
 RUN mkdir -p /client
-RUN curl -fsSL "${TARBALL_URL}" | tar xzf - -C /app --strip-components=1
+RUN curl -fsSL "https://github.com/advplyr/audiobookshelf/archive/refs/tags/v${VERSION}.tar.gz" | tar xzf - -C /app --strip-components=1
 WORKDIR /app/client
 RUN npm ci && npm cache clean --force
 RUN npm run generate
@@ -42,7 +42,7 @@ RUN apk update && \
     && \
     mkdir -p /server \
     && \
-    curl -fsSL "${TARBALL_URL}" | tar xzf - -C /app --strip-components=1 \
+    curl -fsSL "https://github.com/advplyr/audiobookshelf/archive/refs/tags/v${VERSION}" | tar xzf - -C /app --strip-components=1 \
     && \
     chown -R root:root /app \
     && chmod -R 755 /app
