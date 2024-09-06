@@ -2,8 +2,8 @@
 FROM node:20-alpine AS build
 ARG TARGETPLATFORM
 ARG VERSION
-ARG CHANNEL
-ARG TARBALL_URL
+
+
 RUN apk update && \
     apk add --no-cache --update \
     curl \
@@ -18,8 +18,6 @@ RUN npm run generate
 ### STAGE 1: Build server ###
 ARG TARGETPLATFORM
 ARG VERSION
-ARG CHANNEL
-ARG TARBALL_URL
 
 FROM node:20-alpine
 
@@ -36,24 +34,13 @@ RUN apk update && \
     g++ \
     tini
 
-RUN mkdir -p /app \
-	&&\
-	mkdir -p /client/dist \
+RUN mkdir -p /client/dist \
     && \
     mkdir -p /server
 
-RUN curl -fsSL "https://github.com/advplyr/audiobookshelf/archive/refs/tags/v${VERSION}" | tar xzf - -C /app --strip-components=1 \
-    && \
-    chown -R root:root /app \
-    && chmod -R 755 /app
-
 COPY --from=build /app/client/dist /client/dist
-
-RUN cp -R /app/server/* /server \
-	&& \
-	cp  /app/index.js / && cp /app/package* / \
-	&& \
-	rm -rf /app
+COPY --from=build /app/server /server
+COPY --from=build /app/index.js /app/package* /
 
 RUN npm ci --only=production
 RUN apk del make python3 g++
