@@ -34,9 +34,9 @@ RUN apk update && \
     gcompat \
     python3 \
     g++ \
-    tini \
-    && \
-    mkdir -p /app \
+    tini
+
+RUN mkdir -p /app \
 	&&\
 	mkdir -p /client/dist \
     && \
