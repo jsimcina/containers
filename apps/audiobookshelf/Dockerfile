@@ -40,9 +40,9 @@ RUN mkdir -p /app \
 	&&\
 	mkdir -p /client/dist \
     && \
-    mkdir -p /server \
-    && \
-    curl -fsSL "https://github.com/advplyr/audiobookshelf/archive/refs/tags/v${VERSION}" | tar xzf - -C /app --strip-components=1 \
+    mkdir -p /server
+
+RUN curl -fsSL "https://github.com/advplyr/audiobookshelf/archive/refs/tags/v${VERSION}" | tar xzf - -C /app --strip-components=1 \
     && \
     chown -R root:root /app \
     && chmod -R 755 /app
