@@ -19,12 +19,15 @@ RUN \
         bash \
         ca-certificates \
         catatonit \
+        coreutils \
         curl \
         geoip \
+        jo \
         jq \
         nano \
         p7zip \
         python3 \
+        trurl \
         tzdata \
     && \
     case "${TARGETPLATFORM}" in \
@@ -36,12 +39,12 @@ RUN \
     && \
     case "${CHANNEL}" in \
         'stable') \
-            export RELEASE=$(curl -sL "https://github.com/userdocs/qbittorrent-nox-static/releases/latest/download/dependency-version.json" | jq -r '. | "release-\(.qbittorrent)_v\(.libtorrent_2_0)"') \
-            && curl -fsSL -o /app/qbittorrent-nox "https://github.com/userdocs/qbittorrent-nox-static/releases/download/${RELEASE}/${ARCH}-qt5-qbittorrent-nox" \
+            export RELEASE=$(curl -sL "https://github.com/userdocs/qbittorrent-nox-static/releases/latest/download/dependency-version.json" | jq -r '. | "release-\(.qbittorrent)_v\(.libtorrent_1_2)"') \
+            && curl -fsSL -o /app/qbittorrent-nox "https://github.com/userdocs/qbittorrent-nox-static/releases/download/${RELEASE}/${ARCH}-qbittorrent-nox" \
         ;; \
         'beta') \
             export RELEASE=$(curl -sL "https://github.com/userdocs/qbittorrent-nox-static/releases/latest/download/dependency-version.json" | jq -r '. | "release-\(.qbittorrent)_v\(.libtorrent_2_0)"') \
-            && curl -fsSL -o /app/qbittorrent-nox "https://github.com/userdocs/qbittorrent-nox-static/releases/download/${RELEASE}/${ARCH}-qt5-qbittorrent-nox" \
+            && curl -fsSL -o /app/qbittorrent-nox "https://github.com/userdocs/qbittorrent-nox-static/releases/download/${RELEASE}/${ARCH}-qbittorrent-nox" \
         ;; \
     esac \
     && \
