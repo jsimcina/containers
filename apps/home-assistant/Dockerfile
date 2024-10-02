@@ -1,4 +1,4 @@
-FROM docker.io/library/python:3.12.4-alpine
+FROM docker.io/library/python:3.12.7-alpine
 
 ARG TARGETPLATFORM
 ARG VERSION
@@ -99,6 +99,8 @@ RUN \
     && \
     mkdir -p /config \
     && chown nobody:nogroup -R /config \
+    && \
+    pip uninstall --yes uv \
     && \
     apk del --purge .build-deps \
     && \
