@@ -38,12 +38,29 @@ log() {
 
 get_vpn_external_ip() {
   local url="$1"
-  output=$(curl -s "${url}")
+  output=$(curl -us qbit:qbit "${url}")
   echo "${output}" | jq -r .'public_ip'
 }
 
 # Function to send a GET request and extract the port from the response
-get_port_from_url() {
+get_port_from_url_gluetun() {
+  local url="$1"
+  local port_key
+
+  # Try 'port' key first
+  output=$(curl -us qbit:qbit "${url}")
+  port_key=$(echo "${output}" | jq -r '.port')
+
+  if [[ "${port_key}" == "null" ]]; then
+    # If 'port' key is null, try 'listen_port' key
+    output=$(curl -us qbit:qbit "${url}")
+    port_key=$(echo "${output}" | jq -r '.listen_port')
+  fi
+
+  echo "${port_key}"
+}
+
+get_port_from_url_gluetun() {
   local url="$1"
   local port_key
 
@@ -79,7 +96,7 @@ if [[ -z "${external_ip}" ]]; then
   log --level error "External IP is empty. Potential VPN or internet connection issue."
 fi
 
-gluetun_port=$(get_port_from_url "${gluetun_urls["portforwarded"]}")
+gluetun_port=$(get_port_from_url_gluetun "${gluetun_urls["portforwarded"]}")
 qbittorrent_port=$(get_port_from_url "${qbittorrent_urls["prefs"]}")
 
 log --level info "Fetched configuration" \
