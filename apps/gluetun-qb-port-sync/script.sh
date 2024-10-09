@@ -38,7 +38,7 @@ log() {
 
 get_vpn_external_ip() {
   local url="$1"
-  output=$(curl -us qbit:qbit "${url}")
+  output=$(curl -u qbit:qbit -s "${url}")
   echo "${output}" | jq -r .'public_ip'
 }
 
@@ -48,19 +48,19 @@ get_port_from_url_gluetun() {
   local port_key
 
   # Try 'port' key first
-  output=$(curl -us qbit:qbit "${url}")
+  output=$(curl -u qbit:qbit -s "${url}")
   port_key=$(echo "${output}" | jq -r '.port')
 
   if [[ "${port_key}" == "null" ]]; then
     # If 'port' key is null, try 'listen_port' key
-    output=$(curl -us qbit:qbit "${url}")
+    output=$(curl -u qbit:qbit -s "${url}")
     port_key=$(echo "${output}" | jq -r '.listen_port')
   fi
 
   echo "${port_key}"
 }
 
-get_port_from_url_gluetun() {
+get_port_from_url() {
   local url="$1"
   local port_key
 
