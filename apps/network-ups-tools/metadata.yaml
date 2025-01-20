@@ -1,0 +1,9 @@
+---
+app: network-ups-tools
+semver: true
+channels:
+  - name: master
+    platforms: ["linux/amd64"]
+    stable: true
+    tests:
+      enabled: false
