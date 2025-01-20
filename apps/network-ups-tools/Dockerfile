@@ -6,8 +6,7 @@ USER root
 RUN \
   apt-get -qq update \
   && apt-get -qq install -y --no-install-recommends \
-    nut-server \
-  && nut-xml \
+    nut-server nut-xml \  
   && apt-get clean \
   && rm -rf \
     /tmp/* \
