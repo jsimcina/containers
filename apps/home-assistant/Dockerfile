@@ -106,7 +106,7 @@ RUN \
     && chmod +x /bin/go2rtc \
     && mkdir -p /config && chown nobody:nogroup -R /config \
     && apk del --purge .build-deps \
-    && rm -rf /root/.cache /root/.cargo /tmp/*
+    && rm -rf /root/.cache /root/.cargo /tmp/* \
     && rm -rf /config/deps/*
 
 COPY ./apps/home-assistant/entrypoint.sh /entrypoint.sh
