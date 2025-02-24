@@ -16,7 +16,7 @@ RUN \
         postgresql17-client~"${VERSION}"
 
 COPY ./apps/postgres-init17/entrypoint.sh /entrypoint.sh
-
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/usr/bin/catatonit", "--"]
 CMD ["/entrypoint.sh"]
 
