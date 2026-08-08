@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dinodex Hybrid Chain</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Dinodex Hybrid Chain</h1>
+    <p class="subtitle">
+      Select up to <span id="maxCount">10</span> creatures, then run the fusion-tree lookup.
+    </p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="panel-header">
+        <input id="search" type="search" placeholder="Search creature names..." autocomplete="off" />
+      </div>
+
+      <div id="creatureList" class="creature-list" aria-live="polite"></div>
+
+      <div class="panel-footer">
+        <span><span id="selectedCount">0</span> / <span id="maxCountFooter">10</span> selected</span>
+        <button id="clearBtn" type="button">Clear</button>
+        <button id="runBtn" type="button" disabled>Run</button>
+      </div>
+    </section>
+
+    <div class="right-col">
+      <section class="panel">
+        <h2>Result</h2>
+        <pre id="results" class="output">Select creatures and click Run.</pre>
+        <details>
+          <summary>Log</summary>
+          <pre id="log" class="output"></pre>
+        </details>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header-row">
+          <h2>Discord-ready output</h2>
+          <button id="copyDiscordBtn" type="button" disabled>Copy</button>
+        </div>
+        <textarea id="discordOutput" class="output discord-output" readonly rows="10"
+          placeholder="Run a lookup to generate copy/pastable Discord markdown here."></textarea>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
